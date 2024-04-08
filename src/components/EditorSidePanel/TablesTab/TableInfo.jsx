@@ -26,11 +26,11 @@ export default function TableInfo({ data }) {
   return (
     <div>
       <div className="flex items-center mb-2.5">
-        <div className="text-md font-semibold">Name: </div>
+        <div className="text-md font-semibold">表名: </div>
         <Input
           value={data.name}
           validateStatus={data.name === "" ? "error" : "default"}
-          placeholder="Name"
+          placeholder="表名"
           className="ms-2"
           onChange={(value) => updateTable(data.id, { name: value })}
           onFocus={(e) => setEditField({ name: e.target.value })}
@@ -89,12 +89,12 @@ export default function TableInfo({ data }) {
         headerLine={false}
       >
         <Collapse>
-          <Collapse.Panel header="Comment" itemKey="1">
+          <Collapse.Panel header="备注" itemKey="1">
             <TextArea
               field="comment"
               value={data.comment}
               autosize
-              placeholder="Add comment"
+              placeholder="添加备注"
               rows={1}
               onChange={(value) =>
                 updateTable(data.id, { comment: value }, false)
@@ -201,7 +201,7 @@ export default function TableInfo({ data }) {
               });
             }}
           >
-            Add index
+            添加索引
           </Button>
         </Col>
         <Col span={6}>
@@ -238,7 +238,7 @@ export default function TableInfo({ data }) {
             }}
             block
           >
-            Add field
+            添加字段
           </Button>
         </Col>
         <Col span={3}>

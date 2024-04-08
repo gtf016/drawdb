@@ -669,29 +669,29 @@ export default function ControlPanel({
   const saveDiagramAs = () => setModal(MODAL.SAVEAS);
 
   const menu = {
-    File: {
-      New: {
+    "文件": {
+      "新项目": {
         function: () => setModal(MODAL.NEW),
       },
-      "New window": {
+      "新窗口": {
         function: () => {
           const newWindow = window.open("/editor", "_blank");
           newWindow.name = window.name;
         },
       },
-      Open: {
+      "打开文件": {
         function: open,
         shortcut: "Ctrl+O",
       },
-      Save: {
+      "保存": {
         function: save,
         shortcut: "Ctrl+S",
       },
-      "Save as": {
+      "另存为": {
         function: saveDiagramAs,
         shortcut: "Ctrl+Shift+S",
       },
-      "Save as template": {
+      "保存为模板": {
         function: () => {
           db.templates
             .add({
@@ -704,17 +704,17 @@ export default function ControlPanel({
               custom: 1,
             })
             .then(() => {
-              Toast.success("Template saved!");
+              Toast.success("模板已保存!");
             });
         },
       },
-      Rename: {
+      "重命名": {
         function: () => {
           setModal(MODAL.RENAME);
           setPrevTitle(title);
         },
       },
-      "Delete diagram": {
+      "删除关系图": {
         function: async () => {
           await db.diagrams
             .delete(diagramId)
@@ -732,17 +732,17 @@ export default function ControlPanel({
             .catch(() => Toast.error("Oops! Something went wrong."));
         },
       },
-      "Import diagram": {
+      "导入关系图": {
         function: fileImport,
         shortcut: "Ctrl+I",
       },
-      "Import from source": {
+      "从代码导入": {
         function: () => setModal(MODAL.IMPORT_SRC),
       },
-      "Export as": {
+      "导出为": {
         children: [
           {
-            PNG: () => {
+            "PNG": () => {
               toPng(document.getElementById("canvas")).then(function (dataUrl) {
                 setExportData((prev) => ({
                   ...prev,
@@ -754,7 +754,7 @@ export default function ControlPanel({
             },
           },
           {
-            JPEG: () => {
+            "JPEG": () => {
               toJpeg(document.getElementById("canvas"), { quality: 0.95 }).then(
                 function (dataUrl) {
                   setExportData((prev) => ({
@@ -768,7 +768,7 @@ export default function ControlPanel({
             },
           },
           {
-            JSON: () => {
+            "JSON": () => {
               setModal(MODAL.CODE);
               const result = JSON.stringify(
                 {
@@ -790,7 +790,7 @@ export default function ControlPanel({
             },
           },
           {
-            SVG: () => {
+            "SVG": () => {
               const filter = (node) => node.tagName !== "i";
               toSvg(document.getElementById("canvas"), { filter: filter }).then(
                 function (dataUrl) {
@@ -805,7 +805,7 @@ export default function ControlPanel({
             },
           },
           {
-            PDF: () => {
+            "PDF": () => {
               const canvas = document.getElementById("canvas");
               toJpeg(canvas).then(function (dataUrl) {
                 const doc = new jsPDF("l", "px", [
@@ -825,7 +825,7 @@ export default function ControlPanel({
             },
           },
           {
-            DRAWDB: () => {
+            "DRAWDB": () => {
               const result = JSON.stringify(
                 {
                   author: "Unnamed",
@@ -849,10 +849,10 @@ export default function ControlPanel({
         ],
         function: () => {},
       },
-      "Export source": {
+      "导出为代码": {
         children: [
           {
-            MySQL: () => {
+            "MySQL": () => {
               setModal(MODAL.CODE);
               const src = jsonToMySQL({
                 tables: tables,
@@ -867,7 +867,7 @@ export default function ControlPanel({
             },
           },
           {
-            PostgreSQL: () => {
+            "PostgreSQL": () => {
               setModal(MODAL.CODE);
               const src = jsonToPostgreSQL({
                 tables: tables,
@@ -882,7 +882,7 @@ export default function ControlPanel({
             },
           },
           {
-            SQLite: () => {
+            "SQLite": () => {
               setModal(MODAL.CODE);
               const src = jsonToSQLite({
                 tables: tables,
@@ -897,7 +897,7 @@ export default function ControlPanel({
             },
           },
           {
-            MariaDB: () => {
+            "MariaDB": () => {
               setModal(MODAL.CODE);
               const src = jsonToMariaDB({
                 tables: tables,
@@ -912,7 +912,7 @@ export default function ControlPanel({
             },
           },
           {
-            MSSQL: () => {
+            "MSSQL": () => {
               setModal(MODAL.CODE);
               const src = jsonToSQLServer({
                 tables: tables,
@@ -929,23 +929,23 @@ export default function ControlPanel({
         ],
         function: () => {},
       },
-      Exit: {
+      "退出": {
         function: () => {
           save();
           if (saveState === State.SAVED) navigate("/");
         },
       },
     },
-    Edit: {
-      Undo: {
+    "编辑": {
+      "撤销": {
         function: undo,
         shortcut: "Ctrl+Z",
       },
-      Redo: {
+      "重做": {
         function: redo,
         shortcut: "Ctrl+Y",
       },
-      Clear: {
+      "清空所有": {
         function: () => {
           setTables([]);
           setRelationships([]);
@@ -955,53 +955,53 @@ export default function ControlPanel({
           setRedoStack([]);
         },
       },
-      Edit: {
+      "编辑": {
         function: edit,
         shortcut: "Ctrl+E",
       },
-      Cut: {
+      "剪切": {
         function: cut,
         shortcut: "Ctrl+X",
       },
-      Copy: {
+      "复制": {
         function: copy,
         shortcut: "Ctrl+C",
       },
-      Paste: {
+      "粘贴": {
         function: paste,
         shortcut: "Ctrl+V",
       },
-      Duplicate: {
+      "重复": {
         function: duplicate,
         shortcut: "Ctrl+D",
       },
-      Delete: {
+      "删除": {
         function: del,
         shortcut: "Del",
       },
-      "Copy as image": {
+      "复制到图像": {
         function: copyAsImage,
         shortcut: "Ctrl+Alt+C",
       },
     },
-    View: {
-      Header: {
+    "显示": {
+      "顶栏": {
         function: () =>
           setLayout((prev) => ({ ...prev, header: !prev.header })),
       },
-      Sidebar: {
+      "侧边栏": {
         function: () =>
           setLayout((prev) => ({ ...prev, sidebar: !prev.sidebar })),
       },
-      Issues: {
+      "问题": {
         function: () =>
           setLayout((prev) => ({ ...prev, issues: !prev.issues })),
       },
-      "Strict mode": {
+      "严格模式": {
         function: viewStrictMode,
         shortcut: "Ctrl+Shift+M",
       },
-      "Presentation mode": {
+      "演示模式": {
         function: () => {
           setLayout((prev) => ({
             ...prev,
@@ -1012,29 +1012,29 @@ export default function ControlPanel({
           enterFullscreen();
         },
       },
-      "Field summary": {
+      "字段摘要": {
         function: viewFieldSummary,
         shortcut: "Ctrl+Shift+F",
       },
-      "Reset view": {
+      "重置视图": {
         function: resetView,
         shortcut: "Ctrl+R",
       },
-      "Show grid": {
+      "显示网格": {
         function: viewGrid,
         shortcut: "Ctrl+Shift+G",
       },
-      "Show cardinality": {
+      "显示基数": {
         function: () =>
           setSettings((prev) => ({
             ...prev,
             showCardinality: !prev.showCardinality,
           })),
       },
-      Theme: {
+      "主题": {
         children: [
           {
-            Light: () => {
+            "浅色": () => {
               const body = document.body;
               if (body.hasAttribute("theme-mode")) {
                 body.setAttribute("theme-mode", "light");
@@ -1044,7 +1044,7 @@ export default function ControlPanel({
             },
           },
           {
-            Dark: () => {
+            "深色": () => {
               const body = document.body;
               if (body.hasAttribute("theme-mode")) {
                 body.setAttribute("theme-mode", "dark");
@@ -1056,37 +1056,37 @@ export default function ControlPanel({
         ],
         function: () => {},
       },
-      "Zoom in": {
+      "放大": {
         function: zoomIn,
         shortcut: "Ctrl+Up/Wheel",
       },
-      "Zoom out": {
+      "缩小": {
         function: zoomOut,
         shortcut: "Ctrl+Down/Wheel",
       },
-      Fullscreen: {
+      "全屏": {
         function: enterFullscreen,
       },
     },
-    Settings: {
-      "Show timeline": {
+    "设置": {
+      "显示时间线": {
         function: () => setSidesheet(SIDESHEET.TIMELINE),
       },
-      Autosave: {
+      "自动保存": {
         function: () =>
           setSettings((prev) => {
-            Toast.success(`Autosave is ${settings.autosave ? "off" : "on"}`);
+            Toast.success(`自动保存已 ${settings.autosave ? "关闭" : "启用"}`);
             return { ...prev, autosave: !prev.autosave };
           }),
       },
-      Panning: {
+      "拖动": {
         function: () =>
           setSettings((prev) => {
-            Toast.success(`Panning is ${settings.panning ? "off" : "on"}`);
+            Toast.success(`拖动已 ${settings.panning ? "关闭" : "启用"}`);
             return { ...prev, panning: !prev.panning };
           }),
       },
-      "Flush storage": {
+      "刷新缓存": {
         function: async () => {
           db.delete()
             .then(() => {
@@ -1099,7 +1099,7 @@ export default function ControlPanel({
         },
       },
     },
-    Help: {
+    "帮助": {
       Shortcuts: {
         function: () => window.open("/shortcuts", "_blank"),
         shortcut: "Ctrl+H",

@@ -17,7 +17,7 @@ export default function TablesTab() {
         </Col>
         <Col span={8}>
           <Button icon={<IconPlus />} block onClick={() => addTable(true)}>
-            Add table
+            添加表
           </Button>
         </Col>
       </Row>

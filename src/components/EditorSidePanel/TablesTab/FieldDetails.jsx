@@ -19,10 +19,10 @@ export default function FieldDetails({ data, tid, index }) {
 
   return (
     <div>
-      <div className="font-semibold">Default value</div>
+      <div className="font-semibold">默认值</div>
       <Input
         className="my-2"
-        placeholder="Set default"
+        placeholder="设置默认值"
         value={data.default}
         disabled={
           data.type === "BLOB" ||
@@ -91,7 +91,7 @@ export default function FieldDetails({ data, tid, index }) {
       )}
       {isSized(data.type) && (
         <>
-          <div className="font-semibold">Size</div>
+          <div className="font-semibold">尺寸</div>
           <InputNumber
             className="my-2 w-full"
             placeholder="Set length"
@@ -152,7 +152,7 @@ export default function FieldDetails({ data, tid, index }) {
       )}
       {hasCheck(data.type) && (
         <>
-          <div className="font-semibold">Check Expression</div>
+          <div className="font-semibold">检查表达式</div>
           <Input
             className="mt-2"
             placeholder="Set constraint"
@@ -184,7 +184,7 @@ export default function FieldDetails({ data, tid, index }) {
         </>
       )}
       <div className="flex justify-between items-center my-3">
-        <div className="font-medium">Unique</div>
+        <div className="font-medium">唯一</div>
         <Checkbox
           value="unique"
           checked={data.unique}
@@ -213,7 +213,7 @@ export default function FieldDetails({ data, tid, index }) {
         />
       </div>
       <div className="flex justify-between items-center my-3">
-        <div className="font-medium">Autoincrement</div>
+        <div className="font-medium">自动递增</div>
         <Checkbox
           value="increment"
           checked={data.increment}
@@ -252,10 +252,10 @@ export default function FieldDetails({ data, tid, index }) {
           }}
         />
       </div>
-      <div className="font-semibold">Comment</div>
+      <div className="font-semibold">备注</div>
       <TextArea
         className="my-2"
-        placeholder="Add comment"
+        placeholder="添加备注"
         value={data.comment}
         autosize
         rows={2}
@@ -285,7 +285,7 @@ export default function FieldDetails({ data, tid, index }) {
         block
         onClick={() => deleteField(data, tid)}
       >
-        Delete field
+        删除字段
       </Button>
     </div>
   );

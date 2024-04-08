@@ -13,11 +13,11 @@ export default function SidePanel({ width, resize, setResize }) {
   const { selectedElement, setSelectedElement } = useSelect();
 
   const tabList = [
-    { tab: "Tables", itemKey: Tab.TABLES },
-    { tab: "Relationships", itemKey: Tab.RELATIONSHIPS },
-    { tab: "Subject Areas", itemKey: Tab.AREAS },
-    { tab: "Notes", itemKey: Tab.NOTES },
-    { tab: "Types", itemKey: Tab.TYPES },
+    { tab: "表", itemKey: Tab.TABLES },
+    { tab: "关系", itemKey: Tab.RELATIONSHIPS },
+    { tab: "区域", itemKey: Tab.AREAS },
+    { tab: "备忘录", itemKey: Tab.NOTES },
+    { tab: "类型", itemKey: Tab.TYPES },
   ];
 
   const contentList = [
