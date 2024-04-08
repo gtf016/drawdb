@@ -130,11 +130,11 @@ export default function RelationshipInfo({ data }) {
       >
         <div className="flex justify-between items-center mb-3">
           <div className="me-3">
-            <span className="font-semibold">Primary: </span>
+            <span className="font-semibold">主键: </span>
             {tables[data.endTableId].name}
           </div>
           <div className="mx-1">
-            <span className="font-semibold">Foreign: </span>
+            <span className="font-semibold">外键: </span>
             {tables[data.startTableId].name}
           </div>
           <div className="ms-1">
